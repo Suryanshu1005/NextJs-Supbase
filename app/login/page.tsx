@@ -55,6 +55,19 @@ export default function LoginPage() {
     router.refresh();
   };
 
+  const handleSignInWithGoogle = async () => {
+    const res = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+        redirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+  };
+
   if (user) {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gray-100">
@@ -107,6 +120,12 @@ export default function LoginPage() {
           className="w-full p-3 rounded-md bg-gray-700 text-white hover:bg-gray-600 focus:outline-none"
         >
           Sign In
+        </button>
+        <button
+          onClick={handleSignInWithGoogle}
+          className="w-full mt-2 p-3 rounded-md bg-gray-700 text-white hover:bg-gray-600 focus:outline-none"
+        >
+          Sign In with google
         </button>
       </div>
     </main>
