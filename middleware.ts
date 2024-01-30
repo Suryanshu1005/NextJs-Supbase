@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import type {NextRequest} from "next/server";
+import {NextRequest} from "next/server";
 
 import {createMiddlewareClient} from "@supabase/auth-helpers-nextjs";
 
@@ -7,18 +7,22 @@ import {createMiddlewareClient} from "@supabase/auth-helpers-nextjs";
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const pathname = req.nextUrl.pathname;
+  console.log("pathname", pathname);
 
   const supabase = createMiddlewareClient({req, res});
-  const data = await supabase.auth.getSession();
+  const {data} = await supabase.auth.getSession();
+  console.log("data", data);
+  if (pathname === "/about-us" && !data?.session) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+  if (pathname === "/" || (pathname === "/login" && data?.session)) {
+    return NextResponse.redirect(new URL("/about-us", req.url));
+  }
 
-  // if (pathname === "/login" && data?.data?.session) {
-  //   return NextResponse.redirect(new URL("/", req.url));
-  // }
-  console.log("res", res);
   return res;
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/", "/login"],
+  matcher: ["/", "/login", "/about-us"],
 };

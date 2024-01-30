@@ -18,6 +18,5 @@ export const supabaseComponent = createClientComponentClient();
 
 export const supabaseRouteHandler = (cookies: any) => {
   const supabase = createRouteHandlerClient({cookies});
-  console.log("supabase", supabase);
   return supabase;
 };

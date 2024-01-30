@@ -1,4 +1,4 @@
-import {supabaseRouteHandler} from "@/app/utils/supabase";
+import {supabaseRouteHandler} from "@/utils/supabase";
 import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 
