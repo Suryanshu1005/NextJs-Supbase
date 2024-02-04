@@ -15,9 +15,6 @@ export async function middleware(req: NextRequest) {
   if (pathname === "/about-us" && !data?.session) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
-  if (pathname === "/" || (pathname === "/login" && data?.session)) {
-    return NextResponse.redirect(new URL("/about-us", req.url));
-  }
 
   return res;
 }
