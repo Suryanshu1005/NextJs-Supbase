@@ -2,9 +2,14 @@
 
 import {supabaseComponent} from "@/utils/supabase";
 import {useEffect, useState} from "react";
+import BooksCard from "../components/BooksCard";
 
 const Books = () => {
-  const [allbooks, setAllBooks] = useState<any>(null);
+  const [books, setBooks] = useState<any>([]);
+  const [title, setTitle] = useState<any>(null);
+  const [author, setAuthor] = useState<any>(null);
+  const [cost, setCost] = useState<any>(null);
+  const [release, setRelease] = useState<any>(null);
   const [errors, setErrors] = useState("");
 
   useEffect(() => {
@@ -16,14 +21,15 @@ const Books = () => {
       if (error) {
         setErrors("You might want to check your data");
       } else {
-        setAllBooks(books);
+        setBooks(books);
       }
     };
 
     getBooks();
-  });
+  }, []);
 
-  return <pre>{JSON.stringify(allbooks, null, 2)}</pre>;
+  // return <pre>{JSON.stringify(allbooks, null, 2)}</pre>;
+  return <BooksCard book={books} />;
 };
 
 export default Books;
