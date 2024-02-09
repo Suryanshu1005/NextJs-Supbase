@@ -12,7 +12,23 @@ const EditBook = ({params}: {params: {id: string}}) => {
     formState: {errors},
   } = useForm();
 
-  const onSubmit = async (data: any) => {};
+  const onSubmit = async (data: any) => {
+    const payload = {
+      title: data.title,
+      author: data.author,
+      cost: data.cost,
+      release_data: data.release_date,
+    };
+
+    const {data: updatedBook, error} = await supabaseComponent
+      .from("books")
+      .update(payload)
+      .eq("id", `${params.id}`)
+      .select();
+
+    console.log("new book name", updatedBook);
+    console.log("is there any error?", error);
+  };
 
   useEffect(() => {
     const getSingleBook = async () => {
