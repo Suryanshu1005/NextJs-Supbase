@@ -6,10 +6,6 @@ import BooksCard from "../components/BooksCard";
 
 const Books = () => {
   const [books, setBooks] = useState<any>([]);
-  const [title, setTitle] = useState<any>(null);
-  const [author, setAuthor] = useState<any>(null);
-  const [cost, setCost] = useState<any>(null);
-  const [release, setRelease] = useState<any>(null);
   const [errors, setErrors] = useState("");
 
   useEffect(() => {
