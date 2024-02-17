@@ -4,7 +4,7 @@ import {supabaseComponent} from "@/utils/supabase";
 import {useEffect, useState} from "react";
 import BooksCard from "../components/BooksCard";
 
-const Books = () => {
+const Books: any = () => {
   const [books, setBooks] = useState<any>([]);
   const [errors, setErrors] = useState("");
 
